@@ -5,19 +5,37 @@
 *This is a work in progress! I'll be obsessively updating this as time goes on!*
 
 ===Table of Contents===
-<wiki:toc max_depth="5" />
+<wiki:toc max_depth="4" />
 
-====Arithmetic Formats====
-_Description of arithmetic formats_
+===Arithmetic Formats===
+The IEEE 754 standard defines "representations of values and symbols" and may also include how they are encoded.
 
-====Interchange Formats====
-_Description of interchange formats_
+Within the standard, a format comprises:
+  * Finite numbers
+  * Positive and negative infinity
+  * Two forms of NaN (Not a number symbol)
 
-====Rounding Rules====
-_Description of rounding rules_
+====Finite Numbers====
+Finite numbers can be expressed in either binary or decimal forms.
 
-====Operations====
-_Description of operations_
+No matter what base the number is in, finite numbers are always described as the result of the function:
+(-1)^s * c * b^q
+Where s represents the sign of the value (and is thus limited to the values 0 or 1), c represents the coefficient (or the integer value), b represents the base (and is thus limited to the values 2 or 10), and q represents the exponent.
 
-====Exception Handling====
-_Description of exception handling_
+Thus, the value of -54.2 would be expressed as the following equation:
+(-1)^1 * 542 * 10^-1
+
+There are technically constraints surrounding the possible values of c and q, but, in most instances, they can be ignored. Since these are probably important for the implementation of this standard, they will be included later on.
+
+====NaN====
+
+===Interchange Formats===
+
+===Rounding Rules===
+
+===Operations===
+
+===Exception Handling===
+
+===Works Cited===
+  * [http://en.wikipedia.org/wiki/IEEE_floating_point Wikipedia page on the IEEE 754 Standard]
