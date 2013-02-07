@@ -1,0 +1,23 @@
+#summary IEEE Floating Point Standard for Humans
+
+=The IEEE Floating Point Standard=
+
+*This is a work in progress! I'll be obsessively updating this as time goes on!*
+
+===Table of Contents===
+<wiki:toc max_depth="5" />
+
+====Arithmetic Formats====
+_Description of arithmetic formats_
+
+====Interchange Formats====
+_Description of interchange formats_
+
+====Rounding Rules====
+_Description of rounding rules_
+
+====Operations====
+_Description of operations_
+
+====Exception Handling====
+_Description of exception handling_
