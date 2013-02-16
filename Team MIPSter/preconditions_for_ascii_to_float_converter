@@ -1,0 +1,76 @@
+To convert a character array into an IEEE binary single precision floating point number, we need 2 things:
+
+	-pointer to an array base -A[0]
+	-size of that array -N
+
+This array, call it A, will be an input string of ascii characters that represents a decimal number
+A must conform to several specifications:
+	- A[0] is a either a natural number in [1,9] or in {"-","."}	-Basically states if you are going to have a "-", have it at the beginning, and 0 is not acceptable first char
+	- A[1]..A[N-2] is either '.' or 0-9				-".", if it doesn't already occupy the first char, may occupy one of these only
+	- A[N-1] is 0-9 						-if last char is a "." throw it away
+	- Within A, there is a substring, called S or significant portion of size n such that there is a substring of A, containing S who's first and last characters 
+	- Within A, there is a substring, S, begining at the most significant digit and extending 8 places to the right. Any chars to the right can be discarded
+	- No leading zeros
+	- Only 1 Decimal point allowed, omit if it is at the end
+	- Somewhere between the significant portion and the decimal point may be an arbitrary-length string of 0s.
+
+So it should look something like this:
+A[0]..A[N-1] = (-,.,0,0,0,0,0,9,9,9,9,9,9,9) (since 9,999,999>8,300,000=2^23)
+Perhaps later we can worry about accepting input in the form of scientific notation, but for now we have a rudimentary system for creating floating point numbers
+
+To convert the string into a floating point number, we will have to subdivide this string into 2 parts, before
+the decimal point or after.  We easily calculate both from the mutliply by 10 and add cycle
+
+If we assume this,
+
+a = ASCII Char
+0x30<=a<=0x39
+
+then 
+
+bcd = a & 0x0f
+sum = sum*10 + bcd
+
+or another way
+sum = sum(<<3) + sum(<<1) + bcd
+
+We could continue all the way through the significant digits, and factor in the placement of the decimal point 
+at the end, or we chould just stop one sum at the decimal point, and start the next one there as well
+Then the fractional part needs to be divided by its denominator, whatever that may be. We can use the easy "double and 
+chop" method that austin demonstrated, to determine what the binary radix representation of the fractional part is. We 
+may have to figure out what the binary representation of the [power of 10] denominator or we may not. Basically, do
+this until all bits are 0 or 23 iterations, whichever comes first.
+
+Now once we have both parts of the rational number in binary-radix form, the next step is to format that in 
+compliance with IEEE 754.  
+
+
+Division?  how does long division work?  Well in decimal it involves some heuristics, but in binary, it's easy as pi!
+
+Take for example 1/7, or
+   ________
+111|1.00000
+
+we know that 111 does not go into 1, so we check 10.  Nope, 100?  Finally, 111 goes into 1000 and we know that simply because 1000 >= 111 (in binary division,
+it either goes in once, or not at all.  How convenient!)  So how many shifts was that?  I count 3, so we have .001 or 1/8 so far.  This is a good sign, 
+since we know 1/8 + 1/56 = 1/7.  But I digress.  subtracting 111 from 1000, we are left with a remainder of 1.  Great, that's what we started with.  Now we
+know that the rest of the algorithm is going to repeat, so we know 1/7 = 0b 0.001001001001, or 1/8 + 1/64 + 1/512.....  Makes it kind of hard when your radix
+is prime.  At least being 2, it's a fairly common prime factor of many numbers.  Which leads me to my second point.  Enumerating decimal approximations of
+fractions is pretty easy, even a processor will only take 23 steps at most.  However, subsequent approximations will lead to increasingly significant round-
+off error, could there be a better way?  If there was a way to signify repeating digits, we could represent numbers of the form 1/3, 1/7, 1/15 or any 1/(2^n-1) 
+numbers, up through n=23.  Any members of these fractional families can then be obtained by multiplying the numerator times this repeating sequence (ie, 
+if 0001 = is the repeating sequence, then .0001 = 1/15 and .101110111011... = 11/15.  Obviously for the same repeating sequence, starting with .00001 = 1/30
+and .000001 = 1/60 (don't confuse these for the actual numbers .0001 or .000001, rather these bits extended with the repeating portion.  .0001 = 1/16, while 
+.000100010001... = 1/15. You can check to see whether this works or not in decimal too.  1/9 = .1111, 1/99 = .01010101, 1/999 = .001001001001... etc, and then
+multiplying by various numerators.  Detractions of this option mean that we have to dictate when the pattern starts, and how long it is (as the repeating 
+portion may not even use all 23 bits).  We will then have to do a little processing on the fly, but the main detriment is that it restricts our denominator.
+Assuming we can have both repeating and nonrepeating bits represented, we can use all the denominators of the form (2^n) and (2^n-1).  This is a safe 
+assumption since all rational numbers can be represented with repeated digits.  We do need space to store this data however.
+
+Another option would be tor represent multiplicative inverses the same way we represent additive inverses, with an invert bit.  If we designate this as the
+LSB of the mantissa, our system would be pretty much backwards compatible with existing specification, except any system that doesn't implement this will
+misinterpret our data.  Another detraction is that there would have to be an external numerator, because cramming a numerator and a denominator in 23 bits 
+can be difficult
+
+
+
