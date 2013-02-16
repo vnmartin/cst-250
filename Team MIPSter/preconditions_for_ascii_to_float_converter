@@ -65,12 +65,17 @@ and .000001 = 1/60 (don't confuse these for the actual numbers .0001 or .000001,
 multiplying by various numerators.  Detractions of this option mean that we have to dictate when the pattern starts, and how long it is (as the repeating 
 portion may not even use all 23 bits).  We will then have to do a little processing on the fly, but the main detriment is that it restricts our denominator.
 Assuming we can have both repeating and nonrepeating bits represented, we can use all the denominators of the form (2^n) and (2^n-1).  This is a safe 
-assumption since all rational numbers can be represented with repeated digits.  We do need space to store this data however.
+assumption since all rational numbers can be represented with repeated digits.  We do need space to store this additional data however.  We would also have to 
+figure out what the maximum deviation of an actual value could be from the part we can cover discretely, and represent that as a %age.  Since each denominator
+differs from the next by the product of the two of them, the coverage is much denser than 8.3M
 
 Another option would be tor represent multiplicative inverses the same way we represent additive inverses, with an invert bit.  If we designate this as the
 LSB of the mantissa, our system would be pretty much backwards compatible with existing specification, except any system that doesn't implement this will
 misinterpret our data.  Another detraction is that there would have to be an external numerator, because cramming a numerator and a denominator in 23 bits 
 can be difficult
 
+Another thing that might be helpful in figuring out division/fractions is the Liebniz triangle.  We could also map a block in the cache such that numerators
+are one axis and denominators are another in a LUT.
 
-
+we should consider why certain algorithms work (such as the division alg that generates that infinite series), and print out and memorize FxF multiplication
+table
