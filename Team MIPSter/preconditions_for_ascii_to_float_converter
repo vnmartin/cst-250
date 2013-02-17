@@ -8,7 +8,6 @@ A must conform to several specifications:
 	- A[0] is a either a natural number in [1,9] or in {"-","."}	-Basically states if you are going to have a "-", have it at the beginning, and 0 is not acceptable first char
 	- A[1]..A[N-2] is either '.' or 0-9				-".", if it doesn't already occupy the first char, may occupy one of these only
 	- A[N-1] is 0-9 						-if last char is a "." throw it away
-	- Within A, there is a substring, called S or significant portion of size n such that there is a substring of A, containing S who's first and last characters 
 	- Within A, there is a substring, S, begining at the most significant digit and extending 8 places to the right. Any chars to the right can be discarded
 	- No leading zeros
 	- Only 1 Decimal point allowed, omit if it is at the end
@@ -16,7 +15,7 @@ A must conform to several specifications:
 
 So it should look something like this:
 A[0]..A[N-1] = (-,.,0,0,0,0,0,9,9,9,9,9,9,9) (since 9,999,999>8,300,000=2^23)
-Perhaps later we can worry about accepting input in the form of scientific notation, but for now we have a rudimentary system for creating floating point numbers
+Perhaps later we can worry about accepting input in the form of scientific notation, but for now we have a rudimentary system for inputing floating point numbers
 
 To convert the string into a floating point number, we will have to subdivide this string into 2 parts, before
 the decimal point or after.  We easily calculate both from the mutliply by 10 and add cycle
@@ -59,15 +58,17 @@ is prime.  At least being 2, it's a fairly common prime factor of many numbers. 
 fractions is pretty easy, even a processor will only take 23 steps at most.  However, subsequent approximations will lead to increasingly significant round-
 off error, could there be a better way?  If there was a way to signify repeating digits, we could represent numbers of the form 1/3, 1/7, 1/15 or any 1/(2^n-1) 
 numbers, up through n=23.  Any members of these fractional families can then be obtained by multiplying the numerator times this repeating sequence (ie, 
-if 0001 = is the repeating sequence, then .0001 = 1/15 and .101110111011... = 11/15.  Obviously for the same repeating sequence, starting with .00001 = 1/30
+if 0001 = is the repeating sequence, then .0001 0001 0001 = 1/15 and .1011 1011 1011... = 11/15.  Obviously for the same repeating sequence, starting with .00001 = 1/30
 and .000001 = 1/60 (don't confuse these for the actual numbers .0001 or .000001, rather these bits extended with the repeating portion.  .0001 = 1/16, while 
-.000100010001... = 1/15. You can check to see whether this works or not in decimal too.  1/9 = .1111, 1/99 = .01010101, 1/999 = .001001001001... etc, and then
-multiplying by various numerators.  Detractions of this option mean that we have to dictate when the pattern starts, and how long it is (as the repeating 
-portion may not even use all 23 bits).  We will then have to do a little processing on the fly, but the main detriment is that it restricts our denominator.
-Assuming we can have both repeating and nonrepeating bits represented, we can use all the denominators of the form (2^n) and (2^n-1).  This is a safe 
-assumption since all rational numbers can be represented with repeated digits.  We do need space to store this additional data however.  We would also have to 
-figure out what the maximum deviation of an actual value could be from the part we can cover discretely, and represent that as a %age.  Since each denominator
-differs from the next by the product of the two of them, the coverage is much denser than 8.3M
+.0001 0001 0001... = 1/15. You can check to see whether this works or not in decimal too.  1/9 = .1111, 1/99 = .01010101, 1/999 = .001001001001... etc, and then
+multiplying by various numerators.  Detractions of this option mean that we have to dictate when the pattern starts (certain number of MSBs may or may not be 
+repeated), and how long it is (as the repeating portion may not even use all remaining bits, and the repeating portion will rarily fit in 23 bits perfectly, ie 
+the repeated digits would be "out of phase" with the rest of the mantissa except when the repeating portion is 1 or 23 bits long).  We will then have to do 
+a little processing on the fly, but the main detriment is that it restricts our denominator. Assuming we can have both repeating and nonrepeating bits 
+represented, we can use all the denominators of the form (2^n) and (2^n-1).  This is a safe assumption since all rational numbers can be represented with 
+repeated digits.  We do need space to store this additional data however.  We would also have to figure out what the maximum deviation of an actual value 
+could be from the part we can cover discretely, and represent that as a %age.  Since each denominator differs from the next by the product of the two of them, 
+the coverage is much denser than 8.3M
 
 Another option would be tor represent multiplicative inverses the same way we represent additive inverses, with an invert bit.  If we designate this as the
 LSB of the mantissa, our system would be pretty much backwards compatible with existing specification, except any system that doesn't implement this will
@@ -79,3 +80,9 @@ are one axis and denominators are another in a LUT.
 
 we should consider why certain algorithms work (such as the division alg that generates that infinite series), and print out and memorize FxF multiplication
 table
+
+by8rP4aB4Pf3
+
+a number divisible by 2, or when we subtract 1 can be divided by 2 - can we use this to extract factors?  Can we create an algebraic structure manipulator, or a math coprocessor that operates on the factors of a number rather than the number itself?
+Tiered adders / sequential adders
+combinatorics of digit lookahead hardware
