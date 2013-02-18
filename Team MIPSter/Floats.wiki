@@ -28,6 +28,9 @@ Thus, the value of -54.2 would be expressed as the following equation:
 There are technically constraints surrounding the possible values of c and q, but, in most instances, they can be ignored. Since these are probably important for the implementation of this standard, they will be included later on.
 
 ====NaN====
+NaNs are special values that are used when the value that's supposed to be expressed is either undefined or unpresentable.
+
+There are two different kinds of NaN: The quiet NaN (qNaN) and the signaling NaN (sNaN).
 
 ===Interchange Formats===
 
