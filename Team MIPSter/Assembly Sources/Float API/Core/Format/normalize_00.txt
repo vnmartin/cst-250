@@ -1,0 +1,31 @@
+
+# say... we have 
+li $s0, 0x6EE5B
+# as our mantissa.
+
+# we are going to chop off the leading 1
+li $s1, 0x80000000
+li $s2, 0 # counter
+normalize_shift:
+ sll $s0, $s0, 1 #shift left
+ addiu $s3, $s3, 1 # inc counter
+ and $t0, $s1, $s0
+ beq $t0, $zero, normalize_shift
+ nop
+ sll $s0, $s0, 1 #chop
+ addiu $s3, $s3, 1 # inc counter
+ li $t0, 0xFFFFFFFF
+ and $s0, $s0, $t0 # get normalized value
+ li $s1, 0x00000001
+ normalize_shift_back:
+  srl $s0, $s0, 1 #shift right
+  li $t0, 1
+  subu $s3, $s3, $t0 # dec counter
+  and $t0, $s1, $s0
+  beq $t0, $zero, normalize_shift_back
+  nop
+  j exit
+  nop
+
+exit:
+ nop
