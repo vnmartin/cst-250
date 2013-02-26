@@ -1,0 +1,60 @@
+# main source file
+
+.org 0x10000000
+
+
+# offset 
+li $s0, 0
+#array
+li $s1, 0x00000010
+# length of array -1
+li $s2, 3
+# bit counter
+li $s3, 0
+
+li $t0, 2
+sw $t0, 0($s1)
+li $t0, 3
+sw $t0, 4($s1)
+li $t0, 8
+sw $t0, 8($s1)
+li $t0, 9
+sw $t0, 12($s1)
+
+
+# array = {1,4,8,6}
+
+next:
+ lw, $a0, 0x00000010($s0) # get byte
+ and $t1, $t1, $zero # reset counter
+ move $a1, $a0 
+ beq $s2, $zero, add_exit #just add if last byte
+ nop
+ mul:
+  li $t0, 10
+  mullo $a1, $a1, $t0 # mul by ten
+  addiu $t1, $t1 0x01 # inc counter
+  addiu $s3, $s3 1 # inc bit counter for each 0
+  beq $t1, $s2, add # jump to add if done..
+  nop
+ j mul
+ nop
+
+ add:
+ addiu $s3, $s3 1 # inc bit counter for MSD
+ addu $v0, $v0, $a1 # [$v0 = result]
+ addiu $s0, $s0, 4
+ li $t0, 1
+ subu $s2, $s2, $t0 # take one away
+ j next
+ nop
+ add_exit:
+ addu $v0, $v0, $a1 # [$v0 = result]
+ addiu $s0, $s0, 4
+ li $t0, 1
+ subu $s2, $s2, $t0 # take one away
+ j exit
+ nop
+
+exit:
+ nop
