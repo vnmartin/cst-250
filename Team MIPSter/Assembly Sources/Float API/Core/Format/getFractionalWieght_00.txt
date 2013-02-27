@@ -1,0 +1,17 @@
+
+get_weight:
+ li $s0, 1 # default weight
+ li $s1, 0 # counter
+ li $t0, 10
+ shift_weight:
+  mullo $s0, $s0, $t0  # apply weight to pos.
+  addiu $s1, $s1, 1 # inc  counter
+  beq $a3, $s1, break # weight ready?
+  nop 
+  j shift_weight
+  nop
+
+break:
+ nop
+
+

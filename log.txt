@@ -1,0 +1,654 @@
+changeset:   115:c8b6b8832ddd
+tag:         tip
+user:        anthony.limbert
+date:        Thu Feb 21 13:22:39 2013 -0700
+summary:     Removed test file.
+
+changeset:   114:16888df3118b
+user:        anthony.limbert
+date:        Thu Feb 21 13:21:09 2013 -0700
+summary:     Test
+
+changeset:   113:edd47a144552
+user:        adelorme
+date:        Wed Feb 20 21:32:21 2013 -0700
+summary:     minor changes to floatingpoint.plp
+
+changeset:   112:c165b1d03a44
+user:        tk
+date:        Tue Feb 19 23:43:04 2013 -0700
+summary:     register flags???
+
+changeset:   111:4c19baea0b5f
+user:        tk
+date:        Tue Feb 19 23:34:54 2013 -0700
+summary:     decimal fractions to binary
+
+changeset:   110:7094f5b933a1
+user:        adelorme
+date:        Tue Feb 19 21:43:46 2013 -0700
+summary:     base 10 decimal to binary now works, with correct bit count
+
+changeset:   109:7a42abba3423
+parent:      108:0e8119f72498
+parent:      107:436f1b45e16d
+user:        TylerKeeling
+date:        Tue Feb 19 21:00:19 2013 -0700
+summary:     adding bit counter
+
+changeset:   108:0e8119f72498
+parent:      106:ae46b56b940c
+user:        TylerKeeling
+date:        Tue Feb 19 20:59:41 2013 -0700
+summary:     adding bit counter
+
+changeset:   107:436f1b45e16d
+user:        adelorme
+date:        Tue Feb 19 09:10:40 2013 -0700
+summary:     working on converting to binary decimal
+
+changeset:   106:ae46b56b940c
+user:        anthony.limbert
+date:        Sun Feb 17 22:06:42 2013 -0700
+summary:     More organization.
+
+changeset:   105:516c0722ddf5
+user:        anthony.limbert
+date:        Sun Feb 17 17:13:58 2013 -0700
+summary:     Did some organizing.
+
+changeset:   104:ce9f5e5e04ea
+user:        adelorme
+date:        Sun Feb 17 13:48:14 2013 -0700
+summary:     bug fixes
+
+changeset:   103:dcd7976b8031
+user:        adelorme
+date:        Sun Feb 17 13:18:35 2013 -0700
+summary:     fixed error
+
+changeset:   102:585cf8f1e5e3
+user:        adelorme
+date:        Sun Feb 17 13:15:46 2013 -0700
+summary:     fixed build errors
+
+changeset:   101:b3c42a6d8159
+user:        cbellin@asu.edu
+date:        Sat Feb 16 17:32:08 2013 -0700
+summary:     Update
+
+changeset:   100:6bbda5d6ebe2
+user:        cbellin@asu.edu
+date:        Sat Feb 16 15:57:25 2013 -0700
+summary:     Hi!
+
+changeset:   99:a890bc22286f
+user:        adelorme
+date:        Sat Feb 16 15:14:46 2013 -0700
+summary:     more work on flaotingpoint.plp
+
+changeset:   98:45f37a299059
+user:        cbellin
+date:        Sat Feb 16 14:38:35 2013 -0700
+summary:     floating point specs
+
+changeset:   97:c3ea8f0df80d
+user:        tk
+date:        Sat Feb 16 02:11:27 2013 -0700
+summary:     arrayToValue error fixed
+
+changeset:   96:15299ac2e4ac
+user:        tk
+date:        Sat Feb 16 01:03:44 2013 -0700
+summary:     FSM proposed solution to problem 1
+
+changeset:   95:d2d1866143ef
+user:        tk
+date:        Sat Feb 16 00:07:02 2013 -0700
+summary:     progress in pblm 1
+
+changeset:   94:996a53f6b0aa
+user:        adelorme
+date:        Fri Feb 15 10:16:44 2013 -0700
+summary:     counts how many bits integer takes
+
+changeset:   93:a09523f03bb4
+user:        adelorme
+date:        Fri Feb 15 00:26:34 2013 -0700
+summary:     updated floatingpoint.plp, now reads in left and right sides of decimal point, and stores how many digits
+
+changeset:   92:7b941ccc2aa8
+user:        adelorme
+date:        Thu Feb 14 18:26:50 2013 -0700
+summary:     more work on floating point; decimal part
+
+changeset:   91:cacc37589cf3
+user:        adelorme
+date:        Thu Feb 14 12:23:42 2013 -0700
+summary:     fixed errors - can now store integers
+
+changeset:   90:1596ea6687b5
+user:        adelorme
+date:        Thu Feb 14 09:17:56 2013 -0700
+summary:     commented floating point.plp
+
+changeset:   89:15b0fea2c750
+user:        TylerKeeling
+date:        Wed Feb 13 23:42:16 2013 -0700
+summary:     reads floats plus magnitude
+
+changeset:   88:6c72310e8807
+user:        cbellin
+date:        Wed Feb 13 10:06:29 2013 -0700
+summary:     Experimenting with Shell scripts
+
+changeset:   87:132a660f366e
+user:        alexalex1432
+date:        Tue Feb 12 18:47:57 2013 -0700
+summary:     added floating point.plp and our test.plp
+
+changeset:   86:99be3f9fad7e
+user:        dkendry
+date:        Tue Feb 12 16:28:30 2013 -0700
+summary:     DERP
+
+changeset:   85:9e046b38ec87
+user:        TylerKeeling
+date:        Mon Feb 11 23:26:04 2013 -0700
+summary:     ascii converter... minor tweaks needed but works great. Try it!
+
+changeset:   84:e2bdfc88a535
+user:        anthony.limbert
+date:        Thu Feb 07 11:40:50 2013 -0700
+summary:     Made some wiki additions.
+
+changeset:   83:8d10adb60099
+user:        anthony.limbert
+date:        Thu Feb 07 09:03:39 2013 -0700
+summary:     Added floats wiki page.
+
+changeset:   82:203af1c34538
+user:        alexalex1432
+date:        Tue Feb 05 18:20:37 2013 -0700
+summary:     deleted test files
+
+changeset:   81:0b977f0d0af5
+user:        Austin Delorme <adelorme@asu.edu>
+date:        Tue Feb 05 18:19:09 2013 -0700
+summary:     Completed lab 2 task 1
+
+changeset:   80:29a510b5f964
+user:        alexalex1432
+date:        Tue Feb 05 18:16:02 2013 -0700
+summary:     removed task2
+
+changeset:   79:0f48c83ab736
+user:        Austin Delorme <adelorme@asu.edu>
+date:        Tue Feb 05 18:01:26 2013 -0700
+summary:     simple UART read/write
+
+changeset:   78:bd3f7d55e598
+user:        alexalex1432
+date:        Tue Feb 05 18:00:03 2013 -0700
+summary:     added UART task2
+
+changeset:   77:f42b30f16c3f
+user:        jed833
+date:        Tue Feb 05 16:40:09 2013 -0700
+summary:     Lab02-1.1
+
+changeset:   76:1aeab7eaab5a
+user:        marcy
+date:        Tue Feb 05 18:00:22 2013 -0500
+summary:     working uart send receive W
+
+changeset:   75:be63cb84baf1
+user:        Marcy
+date:        Tue Feb 05 17:31:02 2013 -0500
+summary:     New code
+
+changeset:   74:2cbc742dfa11
+user:        marcy
+date:        Tue Feb 05 17:25:33 2013 -0500
+
+changeset:   73:02066eb91be0
+user:        Austin Delorme <adelorme@asu.edu>
+date:        Tue Feb 05 15:12:45 2013 -0700
+summary:     finished UART Read
+
+changeset:   72:d345c61ba648
+user:        Tylerkeeling
+date:        Tue Feb 05 14:31:45 2013 -0700
+summary:     Lab 2-ski
+
+changeset:   71:8950c5b66210
+user:        Austin Delorme <adelorme@asu.edu>
+date:        Tue Feb 05 14:25:40 2013 -0700
+summary:     update UART read/write
+
+changeset:   70:ca68c99aa020
+parent:      68:53ff7abfd4d0
+parent:      69:84ce09bed422
+user:        adelorme
+date:        Tue Feb 05 00:23:44 2013 -0700
+summary:     work on UART read
+
+changeset:   69:84ce09bed422
+parent:      67:6a5ae4f7f73b
+user:        TylerKeeling
+date:        Tue Feb 05 00:21:53 2013 -0700
+summary:     UART strings
+
+changeset:   68:53ff7abfd4d0
+user:        adelorme
+date:        Tue Feb 05 00:21:56 2013 -0700
+summary:     more work on UART Read
+
+changeset:   67:6a5ae4f7f73b
+user:        adelorme
+date:        Mon Feb 04 23:19:38 2013 -0700
+summary:     simplified UART  write, started UART read
+
+changeset:   66:bda2e4c340da
+user:        jed833
+date:        Sun Feb 03 06:44:54 2013 -0700
+summary:     lab 2
+
+changeset:   65:eea845d4742b
+user:        HayBooBoo <jcharri4@asu.edu>
+date:        Thu Jan 31 18:17:15 2013 -0700
+summary:     Second Test
+
+changeset:   64:61aa0f05768e
+user:        HayBooBoo <jcharri4@asu.edu>
+date:        Thu Jan 31 18:09:32 2013 -0700
+summary:     test
+
+changeset:   63:7f4095943d8a
+parent:      61:c66635c7d161
+parent:      62:120e3f995aeb
+user:        psiquier
+date:        Thu Jan 31 17:58:23 2013 -0700
+summary:     testing
+
+changeset:   62:120e3f995aeb
+parent:      60:d1c419aedd49
+user:        sbarnai
+date:        Thu Jan 31 17:52:57 2013 -0700
+summary:     Test file
+
+changeset:   61:c66635c7d161
+user:        psiquier
+date:        Thu Jan 31 17:57:26 2013 -0700
+summary:     testing
+
+changeset:   60:d1c419aedd49
+user:        algrandjean1
+date:        Thu Jan 31 17:45:13 2013 -0700
+summary:     this is a message
+
+changeset:   59:b9af32906594
+parent:      58:50664eaf00a4
+parent:      56:e9269754b374
+user:        algrandjean1
+date:        Thu Jan 31 17:38:03 2013 -0700
+summary:     updated repo
+
+changeset:   58:50664eaf00a4
+user:        algrandjean1
+date:        Thu Jan 31 17:37:34 2013 -0700
+summary:     removed files
+
+changeset:   57:6eec2724d224
+parent:      55:0025aba630b5
+parent:      54:34adf2ed5d67
+user:        algrandjean1
+date:        Thu Jan 31 17:27:13 2013 -0700
+summary:     Message
+
+changeset:   56:e9269754b374
+parent:      54:34adf2ed5d67
+user:        priscilla.siquieros@asu.edu
+date:        Thu Jan 31 17:27:30 2013 -0700
+summary:     testing
+
+changeset:   55:0025aba630b5
+parent:      53:e69c5fcb4f1e
+user:        algrandjean1
+date:        Thu Jan 31 17:21:45 2013 -0700
+summary:     this is a message
+
+changeset:   54:34adf2ed5d67
+user:        jscribne@asu.edu
+date:        Thu Jan 31 17:17:21 2013 -0700
+summary:     hello!
+
+changeset:   53:e69c5fcb4f1e
+parent:      51:dc0153fe0996
+parent:      52:8be4ce2c858d
+user:        jed833
+date:        Thu Jan 31 12:26:41 2013 -0700
+summary:     Directory Test
+
+changeset:   52:8be4ce2c858d
+parent:      50:24d8b4948e6b
+user:        adelorme
+date:        Thu Jan 31 10:28:44 2013 -0700
+summary:     Simple UART Write. Writes a 2 then a 3
+
+changeset:   51:dc0153fe0996
+user:        jed833
+date:        Thu Jan 31 12:25:16 2013 -0700
+summary:     Directory Test
+
+changeset:   50:24d8b4948e6b
+user:        TylerKeeling
+date:        Wed Jan 30 02:30:55 2013 -0700
+summary:     for loop
+
+changeset:   49:2fff8cf78c15
+user:        TylerKeeling
+date:        Wed Jan 30 02:03:26 2013 -0700
+summary:     first code
+
+changeset:   48:f9d236e68a47
+user:        bslau@asu.edu
+date:        Tue Jan 29 19:14:36 2013 -0700
+summary:     Removing all test files on main repo
+
+changeset:   47:d53275b873ba
+user:        bslau@asu.edu
+date:        Tue Jan 29 19:12:04 2013 -0700
+summary:     remove ds_Store
+
+changeset:   46:60256080774b
+user:        bslau
+date:        Tue Jan 29 19:04:44 2013 -0700
+summary:     Folder change
+
+changeset:   45:c77e25c73ea2
+user:        bslau
+date:        Tue Jan 29 19:02:23 2013 -0700
+summary:     adding and moving files
+
+changeset:   44:28f9b1dddfc5
+user:        TylerKeeling
+date:        Tue Jan 29 18:35:44 2013 -0700
+summary:     lab
+
+changeset:   43:7bd6016f0986
+parent:      34:79d4045a1741
+parent:      42:5e90dd54ab18
+user:        adelorme82
+date:        Tue Jan 29 18:28:59 2013 -0700
+summary:     deleting files
+
+changeset:   42:5e90dd54ab18
+parent:      41:e09d42b1cc04
+parent:      37:27b0100c5459
+user:        bslau
+date:        Tue Jan 29 18:23:15 2013 -0700
+summary:     Merge
+
+changeset:   41:e09d42b1cc04
+parent:      38:66b88688889c
+parent:      40:abe34748da10
+user:        bslau
+date:        Tue Jan 29 18:22:54 2013 -0700
+summary:     Commit your changes
+
+changeset:   40:abe34748da10
+user:        fwliu
+date:        Tue Jan 29 18:15:44 2013 -0700
+summary:     Adding image
+
+changeset:   39:72a9fce9971d
+parent:      36:46e08466ce53
+user:        rparmer02
+date:        Tue Jan 29 18:12:45 2013 -0700
+summary:     Upload test
+
+changeset:   38:66b88688889c
+parent:      36:46e08466ce53
+user:        bslau
+date:        Tue Jan 29 18:17:57 2013 -0700
+summary:     Test Commit
+
+changeset:   37:27b0100c5459
+parent:      35:56bef95b30d8
+parent:      36:46e08466ce53
+user:        Vance Anderson
+date:        Tue Jan 29 18:14:04 2013 -0700
+summary:     This should work
+
+changeset:   36:46e08466ce53
+parent:      33:1115894dcfd8
+parent:      32:1de784fd7897
+user:        alexalex1432
+date:        Tue Jan 29 18:08:50 2013 -0700
+summary:     removed images folder in team greybeard
+
+changeset:   35:56bef95b30d8
+parent:      32:1de784fd7897
+user:        Vance Anderson
+date:        Tue Jan 29 18:09:03 2013 -0700
+summary:     This should work
+
+changeset:   34:79d4045a1741
+parent:      32:1de784fd7897
+user:        adelorme
+date:        Tue Jan 29 18:26:35 2013 -0700
+summary:     deleting file
+
+changeset:   33:1115894dcfd8
+parent:      31:aa9f9033a444
+user:        alexalex1432
+date:        Tue Jan 29 18:06:20 2013 -0700
+summary:     removed images folder
+
+changeset:   32:1de784fd7897
+parent:      29:0d088a07c135
+parent:      31:aa9f9033a444
+user:        marcy
+date:        Tue Jan 29 20:04:35 2013 -0500
+summary:     blah
+
+changeset:   31:aa9f9033a444
+user:        alexalex1432
+date:        Tue Jan 29 17:59:00 2013 -0700
+summary:     removed files that were moved
+
+changeset:   30:2fb60dce20a6
+parent:      28:db478eb54ed8
+user:        alexalex1432
+date:        Tue Jan 29 17:57:25 2013 -0700
+summary:     added an images folder for team greybeard
+
+changeset:   29:0d088a07c135
+parent:      11:1fbf1af0eaec
+parent:      28:db478eb54ed8
+user:        marcy
+date:        Tue Jan 29 20:02:22 2013 -0500
+summary:     help
+
+changeset:   28:db478eb54ed8
+user:        alexalex1432
+date:        Tue Jan 29 17:55:00 2013 -0700
+summary:     added picture for wiki
+
+changeset:   27:92a68464c607
+parent:      26:7f96ced3af31
+parent:      12:ecf02eeaa118
+user:        adelorme82
+date:        Tue Jan 29 17:53:08 2013 -0700
+summary:     branch join #7
+
+changeset:   26:7f96ced3af31
+parent:      25:4a3ced08cf0c
+parent:      18:8416ae74394b
+user:        adelorme82
+date:        Tue Jan 29 17:52:05 2013 -0700
+summary:     branch join #6
+
+changeset:   25:4a3ced08cf0c
+parent:      24:eb5c539b1cd7
+parent:      13:d7dc65da29f2
+user:        adelorme82
+date:        Tue Jan 29 17:50:15 2013 -0700
+summary:     branch join #5
+
+changeset:   24:eb5c539b1cd7
+parent:      23:3692874870b1
+parent:      14:462b3f0f1438
+user:        adelorme82
+date:        Tue Jan 29 17:49:21 2013 -0700
+summary:     branch join #4
+
+changeset:   23:3692874870b1
+parent:      22:164e9f1ebb02
+parent:      10:3c555041763e
+user:        adelorme82
+date:        Tue Jan 29 17:48:13 2013 -0700
+summary:     branch join #3
+
+changeset:   22:164e9f1ebb02
+parent:      21:5ec61e309601
+parent:      2:3c18fe77919e
+user:        adelorme82
+date:        Tue Jan 29 17:47:10 2013 -0700
+summary:     branch merge 2
+
+changeset:   21:5ec61e309601
+parent:      20:d2f4f7b8dfdc
+parent:      3:ab3c7eebd392
+user:        adelorme82
+date:        Tue Jan 29 17:45:47 2013 -0700
+summary:     Trying to merge branches
+
+changeset:   20:d2f4f7b8dfdc
+user:        alexalex1432
+date:        Tue Jan 29 17:40:37 2013 -0700
+summary:     trying to fix erased files
+
+changeset:   19:4a41e2c11923
+parent:      17:d0382451331b
+user:        rparmer02
+date:        Tue Jan 29 17:31:23 2013 -0700
+summary:     Create team folder
+
+changeset:   18:8416ae74394b
+parent:      5:0f4763855ed3
+parent:      17:d0382451331b
+user:        fwliu
+date:        Tue Jan 29 17:35:27 2013 -0700
+summary:     Adding HelloWorld
+
+changeset:   17:d0382451331b
+parent:      15:d8baba06816c
+parent:      16:b8ca8a21f667
+user:        anthony.limbert
+date:        Tue Jan 29 17:25:19 2013 -0700
+summary:     Merged.
+
+changeset:   16:b8ca8a21f667
+parent:      9:a9a2b7b966a5
+user:        adelorme82
+date:        Tue Jan 29 17:23:29 2013 -0700
+summary:     Moved file to Team Greybeards folder
+
+changeset:   15:d8baba06816c
+parent:      9:a9a2b7b966a5
+user:        anthony.limbert
+date:        Tue Jan 29 17:24:17 2013 -0700
+summary:     Tried to upload file again.
+
+changeset:   14:462b3f0f1438
+parent:      9:a9a2b7b966a5
+user:        davis.kendry
+date:        Tue Jan 29 17:26:13 2013 -0700
+summary:     this is a test
+
+changeset:   13:d7dc65da29f2
+parent:      9:a9a2b7b966a5
+user:        krishpenumarty
+date:        Tue Jan 29 17:25:39 2013 -0700
+summary:     yes
+
+changeset:   12:ecf02eeaa118
+parent:      9:a9a2b7b966a5
+user:        SUUUUUUP
+date:        Tue Jan 29 17:34:48 2013 -0700
+summary:     did some stuff
+
+changeset:   11:1fbf1af0eaec
+parent:      8:af6113a284f0
+user:        marcy
+date:        Tue Jan 29 19:51:07 2013 -0500
+summary:     help
+
+changeset:   10:3c555041763e
+parent:      5:0f4763855ed3
+user:        Austin
+date:        Tue Jan 29 17:33:27 2013 -0700
+summary:     test
+
+changeset:   9:a9a2b7b966a5
+parent:      6:860616755406
+parent:      7:ee2713762a03
+user:        adelorme
+date:        Tue Jan 29 17:17:51 2013 -0700
+summary:     I have no idea what I'm doing
+
+changeset:   8:af6113a284f0
+parent:      4:8e98f79293d9
+user:        marcy
+date:        Tue Jan 29 19:43:08 2013 -0500
+summary:     trying
+
+changeset:   7:ee2713762a03
+parent:      1:95eb789a4f56
+user:        alexalex1432
+date:        Tue Jan 29 17:15:12 2013 -0700
+summary:     added team folder
+
+changeset:   6:860616755406
+parent:      1:95eb789a4f56
+user:        adelorme82
+date:        Tue Jan 29 17:15:24 2013 -0700
+summary:     The first, test document, uploaded by adelorme
+
+changeset:   5:0f4763855ed3
+parent:      1:95eb789a4f56
+user:        fwliu
+date:        Tue Jan 29 17:24:00 2013 -0700
+summary:     Adding HelloWorld
+
+changeset:   4:8e98f79293d9
+parent:      0:d59fd572fd29
+user:        marcy
+date:        Tue Jan 29 19:30:27 2013 -0500
+summary:     Uploading
+
+changeset:   3:ab3c7eebd392
+parent:      -1:000000000000
+user:        jed833
+date:        Wed Jan 30 00:26:56 2013 -0700
+summary:     test
+
+changeset:   2:3c18fe77919e
+parent:      -1:000000000000
+user:        lmk236
+date:        Tue Jan 29 17:24:22 2013 -0700
+summary:     this is a test,
+
+changeset:   1:95eb789a4f56
+parent:      -1:000000000000
+user:        alexalex1432
+date:        Tue Jan 29 17:06:00 2013 -0700
+summary:     this is a test text file
+
+changeset:   0:d59fd572fd29
+user:        marcy
+date:        Tue Jan 29 19:28:32 2013 -0500
+summary:     Uploading
+
