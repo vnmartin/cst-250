@@ -1,0 +1,163 @@
+# New ASM File
+
+calc_M:
+nop
+
+beq $a0, $zero, m_neg
+nop
+
+m_pos:
+########### POSITIVE EXPONENT ############
+
+# we have sign and exponent.
+# we need to calculate the manitissa.
+
+
+# we have 23 bits for the mantissa..
+# 23 - bin int size for fractional
+# we will start appending the fraction to pos. 23 - size(i) see line: 63
+# we have to normalize these values... we are assuming any leading ones in the integer portion are implicit. see line: 99
+
+# INTEGER
+##########################################
+integer:
+# Apply integer portion to result...
+# we have already calulated is binary length
+# the sign and exponent portions are in place..
+# we are inserting integer portion at bit 22.
+
+# $a1: Integer component
+
+# shift amt of integer in $s0
+li $t0, 23
+subu $s0, $t0, $a2 # 23 - size(i) # inserion point
+
+# shift integer into position
+li $t0, 0 # shift counter
+position_integer:
+ sll $a0, $a0, 1
+ addiu $t0, $t0, 1
+ beq $t0, $s0, continue_0
+ nop
+ j position_integer
+ nop
+
+continue_0:
+ # Apply to result
+ or $v1, $v1, $a0
+ nop
+ j normalize
+ nop
+
+#FRACTIONAL
+###########################################
+fractional:
+# converts a decimal integer into fractional form
+# given a decimal value and its length
+
+# decimal number
+#a2
+
+# weight
+get_weight:
+ li $s0, 1 # default weight
+ li $s1, 0 # counter
+ li $t0, 10
+ shift_weight:
+  mullo $s0, $s0, $t0  # apply weight to pos.
+  addiu $s1, $s1, 1 # inc  counter
+  beq $a3, $s1, break # weight ready?
+  nop 
+  j shift_weight
+  nop
+
+break:
+ nop
+move $s1, $s0 # s1 contains weight
+
+# insertion point in $s3
+li $t0, 23
+subu $s3, $t0, $a2 # 23 - size(i) # inserion point
+
+#mask for insertion point in $s2
+li $s2, 1
+li $t0, 0 # shift counter
+shift_insertion:
+ sll $s2, $s2, 1
+ addiu $t0, $t0, 1
+ beq $t0, $s3, continue_1
+ nop
+ j shift_insertion
+ nop
+
+continue_1:
+nop
+
+li $s4, 0 # collection register
+
+bin_d:
+ sll $a1, $a1, 1  # mult by two
+ li $t0, 1
+ subu $s4, $a1, $s1 # sub bias into collection register 
+ li $t0, 1
+  subu $s3, $s3, $t0 # decrement counter
+ slt $t1, $s4, $zero # $shifted val < (val - bias) ? 1:0
+ beq $t1, $t0, append_zero # if true
+ nop
+ append_one:
+  or $v1, $v1, $s2 # add a one
+  srl $s2, $s2, 1 # shift mask
+  move $a1, $s4 # retain bias result
+  and $s4, $s4, $zero # clear bias result
+  beq $s3, $zero, return_2 # final pos.
+  nop
+j bin_d
+nop
+
+ append_zero:
+  srl $s2, $s2, 1 # shift mask
+  # retain shift value
+  and $s4, $s4, $zero # clear bias result
+  beq $s3, $zero, return_2 # final pos.
+  nop
+  j  bin_d
+  nop
+
+###########################################
+
+# NORMAILIZE
+###########################################
+normalize:
+
+# we are going to chop off the leading 1
+li $s1, 0x80000000
+li $s2, 0 # counter
+normalize_shift:
+ sll $v1, $v1, 1 #shift left
+ addiu $s2, $s2, 1 # inc counter
+ and $t0, $s1, $v1
+ beq $t0, $zero, normalize_shift
+ nop
+ sll $v1, $v1, 1 #chop
+ # addiu $s2, $s2, 1
+ li $t0, 0xFFFFFFFF
+ and $v1, $v1, $t0 # get normalized value
+ normalize_shift_back:
+  srl $v1, $v1, 1 #shift right
+  li $t0, 1
+  subu $s2, $s2, $t0 # dec counter
+  bne $s2, $zero, normalize_shift_back
+  nop
+  j fractional
+  nop
+###########################################
+
+m_neg:
+########### NEGATIVE EXPONENT #############
+li $t0, 0xFF7FFFFF # normalize 
+and $v1, $v1, $t0
+ 
+
+return_2:
+ jr $ra #return to main
+ nop
