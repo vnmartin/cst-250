@@ -1,0 +1,49 @@
+# main source file
+
+.org 0x10000000
+
+#################
+# Team MIPSter
+# Format 
+# 02.22.13
+#################
+
+# Prototype of Format core component
+
+#######################################
+#               SETUP                 #
+####################################### 
+
+li $v0, 0x00000000 # Sign + Exponent
+li $v1, 0x00000000 # Mantissa
+# assume sign is available in stat. reg.
+li $a0, 0 # Integer component
+li $a1, 0 # Fractional component
+li $a2, 0 # bin size of Int 
+li $a3, 0 # dec size of Frac
+
+
+#######################################
+#              PROGRAM                #
+####################################### 
+
+# Go calculate sign
+jal calc_S
+nop
+
+# Go calculate exponent
+jal calc_E
+nop
+
+# Go calculate mantissa
+jal calc_M
+nop
+
+# Go smoosh (sign + exponent + mantissa)
+jal smoosh
+nop
+
+
+fin:
+ nop
+ j fin

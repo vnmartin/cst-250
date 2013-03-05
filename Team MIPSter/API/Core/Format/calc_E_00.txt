@@ -1,0 +1,121 @@
+
+calc_E:
+nop
+
+beq $a0, $zero, e_neg
+nop
+
+e_pos:
+######### POSITIVE EXPONENTS ###########
+
+# Shift left and count the zeros until we get a one.
+# Take one way and add bias (127)
+
+li $s0, 0 # counter
+li $s1, 0x80000000 # bit 32
+li $s2, 0 # overflow register
+li $s3, 31
+or $t0, $t0, $a0 # get a copy
+
+bit_count:
+sll $t0, $t0, 1 # shift left
+and $s2, $t0, $s1 # mask for bit 32
+bne $s2, $zero, return_pos
+nop
+addiu $s0, $s0, 1 # increment counter
+j bit_count
+nop
+
+return_pos:
+subu $s0, $s3, $s0 # count = 32 - count
+li $t0, 1
+subu $s0, $s0, $t0 # normalize
+addiu $s0, $s0, 127 # bias 127
+sll $v0, $v0, 8 
+or $v0, $s0, $v0 # mask in exponent
+sll $v0, $v0, 23 # move over!!
+jr $ra # back to main
+nop
+
+e_neg:
+########## NEGATIVE EXPONENTS ############
+
+# Calculate binary fraction to 31 sig bits
+# sll and count the zeros until weve reacehed a 1...
+# add one and subtract from bias (127)
+
+# weight
+weight_E:
+ li $s0, 1 # default weight
+ li $s1, 0 # counter
+ li $t0, 10
+ shift_weight_E:
+  beq $a3, $s1, break_E # weight ready?
+  nop 
+  mullo $s0, $s0, $t0  # apply weight to pos.
+  addiu $s1, $s1, 1 # inc  counter
+  j shift_weight_E
+  nop
+
+break_E:
+ nop
+
+#s0 contains weight
+li $s1, 0 # collection register
+li $s2, 0x00800000 # marker for sig. bits
+li $s3, 31 # sig bits
+li $s4, 0 # leading zeros counter
+
+bin_d_E:
+ sll $a1, $a1, 1  # mult by two
+ li $t0, 1
+ subu $s1, $a1, $s0 # sub bias into collection register 
+ li $t0, 1
+ slt $t1, $s1, $zero # $shifted val < (val - bias) ? 1:0
+ beq $t1, $zero, set_leading_one
+ nop
+ beq $t1, $t0, append_zero_E # if true
+ nop
+ append_one_E:
+  subu $s3, $s3, $t0 # decrement counter
+  or $v1, $v1, $s2 # add a one
+  srl $s2, $s2, 1 # shift mask
+  move $a1, $s1 # retain bias result
+  and $s1, $s1, $zero # clear bias result
+  beq $s3, $zero, return_neg # pos. no. 31
+  nop
+j bin_d_E
+nop
+
+ append_zero_E:
+  li $t0, 1
+  bne $s5, $t0, count_leading_zero # we havent reached the first non-zero bit.
+  nop
+  subu $s3, $s3, $t0 # decrement counter
+  srl $s2, $s2, 1 # shift mask
+  # retain shift value
+  and $s1, $s1, $zero # clear bias result
+  beq $s3, $zero, return_neg # pos. no. 31
+  nop
+  j  bin_d_E
+  nop
+
+set_leading_one:
+ li $s5, 1
+ j append_one_E
+ nop
+
+count_leading_zero:
+ addiu $s4, $s4, 1 # count the zero
+ j bin_d_E
+ nop
+
+return_neg:
+addiu $s4, $s4, 1 # inc counter
+li $t0, 127
+subu $s4, $t0, $s4 # bias 127
+sll $v0, $v0, 8 
+or $v0, $s4, $v0 # mask in exponent
+sll $v0, $v0, 23 # move over!!
+jr $ra # back to main
+nop

@@ -1,0 +1,66 @@
+# main source file
+
+.org 0x10000000
+
+
+# rounds off a binary fraction given:
+#  binary fraction
+#  rounding point
+
+
+# binary fraction
+li $s0, 0x4c5d6388 # becimal value .2983
+
+# rounding point == ((23 - exponent) - `1) 
+# suppose... 8?
+
+# position
+li $s1, 1
+
+# counter == rounding  point + 1
+li $s3, 8
+
+round_off:
+ ori $t0, $s0, 1 # get a copy of fraction
+ sll $s1, $s1, 8 # move to position
+ and $t0, $t0, $s1 # mask
+ beq $t0, $zero, round_down
+ nop
+ round_up:
+  jal get_mask
+  nop
+  and $v0, $a0, $s0 # mask out lost
+  srl $v0, $v0, 8 # shift down
+  addiu $v0, $v0, 1 # round up
+  j exit
+  nop
+
+ round_down:
+  jal get_mask
+  nop
+  and $v0, $a0, $s0 # mask out lost
+  srl $v0, $v0, 8 # shift down
+  # round down
+  j exit
+  nop
+
+
+get_mask: 
+ or $a0, $s1, $s1 # go or yourself...
+ sll $s1, $s1, 1 # 
+ or $s1, $s1, $a0 # save result
+ li $t0, 32
+ addiu $s3, $s3, 1 # inc counter
+ beq $s3, $t0, return # last bit?
+ nop
+ j get_mask
+ nop
+
+ return:
+  jr $ra
+  nop
+# end get_mask
+
+exit:
+ nop 
+

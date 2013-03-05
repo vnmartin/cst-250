@@ -1,0 +1,13 @@
+
+calc_S:
+nop
+
+# Will need to check status register for sign.
+
+#li $t0, 0x00000001 # sign -
+li $t0, 0x00000000 # sign +
+and $v0, $v0, $t0
+
+return_0:
+jr $ra # jump back to main
+nop
