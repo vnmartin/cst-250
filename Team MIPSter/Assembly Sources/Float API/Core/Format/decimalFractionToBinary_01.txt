@@ -1,0 +1,66 @@
+ # main source file
+
+.org 0x10000000
+
+
+# converts a decimal integer into fractional form
+# given a decimal value and its length
+# this revision takes care of the reversal problem.. just reads em in backwards!
+
+# decimal fraction 
+li $s0, 2983 # .2983
+
+# bias
+li $s1, 10000
+
+#mask
+li $s2, 2147483648
+
+#counter 
+li $s3, 31 
+
+# collection register
+li $s4, 0
+
+# sig. bits
+li $s5, 1 # 31
+
+#result 
+li $v0, 0
+
+
+# need to calculate bias!
+# expected result.. #01001100010111010110001110001000...
+# PASS!!!
+
+
+bin_d:
+ sll $s0, $s0, 1  # mult by two
+ li $t0, 1
+ subu $s3, $s3, $t0 # decrement counter
+ subu $s4, $s0, $s1 # sub bias into collection register 
+ li $t0, 1
+ slt $a0, $s4, $zero # $shifted val < (val - bias) ? 1:0
+ beq $a0, $t0, append_zero # if true
+ nop
+ append_one:
+  or $v0, $v0, $s2 # add a one
+  srl $s2, $s2, 1 # shift mask
+  move $s0, $s4 # retain bias result
+  and $s4, $s4, $zero # clear bias result
+  beq $s3, $s5, exit # pos. no. 31
+  nop
+j bin_d
+nop
+
+ append_zero:
+  srl $s2, $s2, 1 # shift mask
+  # retain shift value
+  and $s4, $s4, $zero # clear bias result
+  beq $s3, $s5, exit # pos. no. 31
+  nop
+  j  bin_d
+  nop
+
+exit:
+ nop

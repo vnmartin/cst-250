@@ -1,0 +1,9 @@
+0 - point 
+1 - sign
+2 - zero
+3 - NaN
+4 - Overflow
+5 - Underflow
+6 - Invalid Operation
+7 - Division By zero
+8 - Inexact
