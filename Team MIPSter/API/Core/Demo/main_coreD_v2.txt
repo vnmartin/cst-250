@@ -1,0 +1,106 @@
+# main source file
+
+.org 0x10000000
+
+
+###############
+# Team MIPSter
+# Core Demo v2
+# 03.14.13
+###############
+
+############ SETUP ###############
+
+integer_array:
+ .space 32
+
+frac_array:
+ .space 32
+
+
+########### PROGRAM ##############
+
+main:
+
+j prompt
+nop
+
+welcome_prompt:
+ .asciiz "Enter your number..."
+
+prompt:
+ li $a0, welcome_prompt
+ jal libplp_uart_write_string
+ nop
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000d  #newline
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000a  #linefeed
+
+# read float from UART
+jal readFloat
+nop
+
+# parse the input for errors
+jal parse
+nop
+
+# prep the input for formatting
+jal prep
+nop
+
+# format the input
+jal calc_S
+nop
+
+jal calc_E
+nop
+
+jal calc_M
+nop
+
+short_1:
+jal smoosh
+nop
+
+# write out the results
+j result_final
+nop
+
+p3:
+ .asciiz "S.P. Bit Pattern:"
+line:
+ .asciiz "================================"
+
+result_final:
+ li $a0, p3
+ jal libplp_uart_write_string
+ nop
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000d  #newline
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000a  #linefeed
+ move $a0, $v0
+ jal libplp_uart_write_value_b2
+ nop
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000d  #newline
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000a  #linefeed
+ li $a0, line
+ jal libplp_uart_write_string
+ nop
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000d  #newline
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000a  #linefeed
+
+
+fin:
+ nop
+ j main
+ nop
+
+############## END ################
+
+
