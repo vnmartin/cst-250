@@ -21,6 +21,8 @@ It does this with the help of the following four
 
 == Extensible ==
 
+=== IO ===
+
 === Operations ===
 
 === Special ===
