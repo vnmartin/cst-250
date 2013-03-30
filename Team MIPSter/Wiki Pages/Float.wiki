@@ -1,0 +1,26 @@
+#summary Documentation of the MIPSters' implementation of IEEE 754
+
+= IEEE 754 MIPSters Style =
+
+<wiki:toc max_depth="4" />
+
+== The Core API ==
+The core API is, as the name implies, the core of the API. This includes converting
+the decimal floating point string into its binary counterpart, verifying that said string
+is a valid floating point number
+
+=== Format ===
+Format is the most visible component of the API.
+The job of Format is to take a given decimal floating point value and convert it to binary.
+
+It does this with the help of the following four 
+
+=== Verify ===
+ 
+=== Exception ===
+
+== Extensible ==
+
+=== Operations ===
+
+=== Special ===
