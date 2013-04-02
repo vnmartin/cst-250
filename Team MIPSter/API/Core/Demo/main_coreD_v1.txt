@@ -1,0 +1,44 @@
+# main source file
+
+.org 0x10000000
+
+
+###############
+# Team MIPSter
+# Core Demo v1
+# 03.11.13
+###############
+
+########### PROGRAM ##############
+
+# read float from UART
+jal readFloat
+nop
+
+# parse the input for errors
+jal parse
+nop
+
+# prep the input for formatting
+jal prep
+nop
+
+# format the input
+jal calc_S
+nop
+
+jal calc_E
+nop
+
+jal calc_M
+nop
+
+jal smoosh
+nop
+
+fin:
+ nop
+
+############## END ################
+
+

@@ -1,0 +1,130 @@
+# New ASM File
+
+###############################
+#        PRECONDITIONS        # 
+###############################
+
+# pointer to integer an fraction decimal strings
+# length of a in $a2
+# length of b in $a3
+
+prep:
+nop
+li $a0, integer_array
+li $a1, frac_array
+li $t0, 1
+subu $a2, $a2, $t0
+
+###############################
+
+int_to_value:
+move $s1, $a0
+move $s2, $a2
+
+lw $t0, 0($s1)
+li $t1, 0x2D
+bne $t0, $t1, next
+nop
+addiu $s1, $s1, 4
+
+
+next:
+lw, $s3, 0($s1) # get byte
+and $t1, $t1, $zero # reset counter
+move $s4, $s3
+beq $s2, $zero, add #just add if last byte
+nop
+mul:
+li $t0, 10
+mullo $s4, $s4, $t0 # mul by ten
+addiu $t1, $t1 0x01 # inc counter
+beq $t1, $s2, add # jump to add if done..
+nop
+j mul
+nop
+
+add:
+addu $v0, $v0, $s4 # [$v0 = result]
+addiu $s1, $s1, 0x4
+li $t0, 1
+beq $s2, $zero, frac_to_value
+nop
+subu $s2, $s2, $t0 # take one away
+j next
+nop
+
+#######################################
+
+frac_to_value:
+move $s1, $a1
+move $s2, $a3
+
+# length of array - 1
+li $t0, 1
+subu $s2, $s2, $t0
+
+next1:
+lw, $s3, 0($s1) # get byte
+and $t1, $t1, $zero # reset counter
+move $s4, $s3
+beq $s2, $zero, add1 #just add if last byte
+nop
+mul1:
+li $t0, 10
+mullo $s4, $s4, $t0 # mul by ten
+addiu $t1, $t1 0x01 # inc counter
+beq $t1, $s2, add1 # jump to add if done..
+nop
+j mul1
+nop
+
+add1:
+addu $v1, $v1, $s4 # [$v0 = result]
+addiu $s1, $s1, 0x4
+li $t0, 1
+beq $s2, $zero, int_bin_count
+nop
+subu $s2, $s2, $t0 # take one away
+j next1
+nop
+
+int_bin_count:
+li $s0, 0 #counter
+move $s1, $v0 # integer
+li $s2, 0x80000000 # bit 32
+li $s3, 0 #overflow register
+li $s4, 31
+beq $s1, $zero, return_prep # bounce out if less than 1
+nop
+
+# copy integer to another register to maintian value
+int_bit_count:
+sll $s1, $s1, 1 # shift left
+and $s3, $s1, $s2 # mask for bit 32
+bne $s3, $zero, exit
+nop
+addiu $s0, $s0, 1 # increment counter
+j int_bit_count
+nop
+
+exit:
+subu $s0, $s4, $s0 # count = 32 - count
+nop
+
+###############################
+#        POSTCONDITIONS       # 
+###############################
+
+return_prep:
+move $a0, $v0 # Integer component
+move $a1, $v1 # Fractional component
+move $a2, $s0 # bin size of Int
+# $a3 dec size of Frac
+li $v0, 0x00000000 # Sign + Exponent
+li $v1, 0x00000000 # Mantissa
+# assume sign is available in stat. reg. $s7
+jr $ra
+nop
+
+
+
