@@ -1,0 +1,35 @@
+
+
+# Shift left and count the zeros until we get a one.
+# Take one way and add bias (127)
+
+
+# $a0: Integer component
+
+li $s0, 0 # counter
+li $s1, 0x80000000 # bit 32
+li $s2, 0 # overflow register
+li $s3, 31
+
+or $t0, $t0, $a0 # get a copy
+
+
+bit_count:
+sll $t0, $t0, 1 # shift left
+and $s2, $t0, $s1 # mask for bit 32
+bne $s2, $zero, return_1
+nop
+addiu $s0, $s0, 1 # increment counter
+j bit_count
+nop
+
+return_1:
+subu $s0, $s3, $s0 # count = 32 - count
+li $t0, 1
+subu $s0, $s0, $t0 # normalize
+addiu $s0, $s0, 127 # bias 127
+sll $v0, $v0, 8 
+or $v0, $s0, $v0 # mask in exponent
+sll $v0, $v0, 23 # move over!!
+jr $ra # back to main
+nop
