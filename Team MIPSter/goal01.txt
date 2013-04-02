@@ -1,0 +1,18 @@
+Processes to understand:
+     1. Exponent
+		Bias
+ 		Binary point
+	2. Mantissa
+           	Rounding
+		Decimal fractions => binary
+	3. Exponent + Mantissa
+    		Normalized
+		NAN
+		Zero
+		
+
+
+Organization:
+	•	Modularization of tasks into "services"
+	•	Include files & version control*
+	•	API focus
