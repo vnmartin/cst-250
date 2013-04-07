@@ -1,0 +1,124 @@
+# New ASM File
+
+###############################
+#        PRECONDITIONS        # 
+###############################
+
+parse:
+nop
+move $a2, $v0
+move $a3, $v1
+li $t0, 1
+subu $a2, $a2, $t0
+and $v0, $v0, $zero
+and $v1, $v1, $zero
+
+parse_int:
+li $a0, integer_array
+move $s0, $a0 #address of int array
+li $s2, 0 # counter
+
+li $t0, 0x2D
+lw $s1, 0($s0)
+bne $s1, $t0 parse_int_loop
+nop
+li $s7, 1 # set sign flag
+li $t0, 1
+subu $a2, $a2, $t0
+addiu $s0, $s0, 4
+
+parse_int_loop:
+ lw $s1, 0($s0) #get next byte
+ 
+ # exit conditions:
+ beq $s2, $a2, parse_frac
+ nop
+ 
+ # should be decimal ascii...
+ li $t0, 0x30
+ slt $t1, $s1, $t0
+ li $t0, 0x39
+ slt $t2, $t0, $s1
+ li $t0, 1
+ beq $t1, $t0, error
+ nop
+ beq $t2, $t0, error
+ nop
+ 
+ # convert to BCD
+ li $t0, 0x0F
+ and $s1, $s1, $t0
+ sw $s1, 0($s0)
+ 
+ addiu $s2, $s2, 1 # inc. counter
+ addiu $s0, $s0, 4 # inc. offset
+j parse_int_loop
+nop
+
+
+parse_frac:
+li $a1, frac_array
+move $s0, $a1 #address of frac array
+li $s3, 0 # counter
+lw $s1, 0($s0) #get next byte
+
+parse_frac_loop:
+ lw $s1, 0($s0) #get next byte
+ 
+ 
+ # exit conditions:
+ beq $s3, $a3, return_parse
+ nop
+ 
+ # should be decimal ascii...
+ li $t0, 0x30
+ slt $t1, $s1, $t0
+ li $t0, 0x39
+ slt $t2, $t0, $s1
+ li $t0, 1
+ beq $t1, $t0, error
+ nop
+ beq $t2, $t0, error
+ nop
+
+ # convert to BCD
+ li $t0, 0x0F
+ and $s1, $s1, $t0
+ sw $s1, 0($s0)
+ 
+ addiu $s3, $s3, 1 # inc. counter
+ addiu $s0, $s0, 0x4 # inc. offset
+j parse_frac_loop
+nop
+
+error:
+ j error_msg
+ nop
+ 
+ e0:
+  .asciiz "ERROR: [S][INTEGER][.][FRACTION]"
+ error_msg:
+ li $a0, e0
+ jal libplp_uart_write_string
+ nop
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000d  #newline
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000a  #linefeed
+ li $a0, line
+ jal libplp_uart_write_string
+ nop
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000d  #newline
+ jal libplp_uart_write
+ ori $a0, $zero, 0x000a  #linefeed
+ j main
+ nop
+
+###############################
+#        POSTCONDITIONS       # 
+###############################
+
+return_parse:
+ jr $ra
+ nop
