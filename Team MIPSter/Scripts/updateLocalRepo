@@ -1,0 +1,18 @@
+#Add all files that are currently in local repository to the staging area
+#hg add
+
+#If we don't sync up our repository with the main one, we will end up creating a fork
+hg pull
+
+#update all files that have changed remotely
+hg update
+
+#if differences   ; diff?   ; wait for user input?
+#hg merge
+
+#date > tempfile
+#
+#hg commit -u “cbellin” -m "Commit message "  #Later request commit message from user
+#hg push
+
+
