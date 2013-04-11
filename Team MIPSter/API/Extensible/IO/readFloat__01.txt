@@ -1,0 +1,79 @@
+# New ASM File
+
+###############################
+#        PRECONDITIONS        # 
+###############################
+
+# [s][int][.][frac]
+readFloat:
+nop
+
+integer_array:
+ .space 32
+
+frac_array:
+ .space 32
+
+
+li $s2, integer_array # left hand array (a)
+li $s3, frac_array # right side array (b)
+li $s0, 0xf0000000 # UART
+li $s1, 0x00000000 # position counter
+li $s4, 0x00000000 # point flag 
+
+read_float:
+lw $t0, 4($s0) # load UART status
+andi $t0, $t0, 0x02 # mask for ready-bit
+beq $t0, $zero, isNull
+nop
+lw $s6, 8($s0) # read receive buffer
+sw $t0, 0($s0) # clear ready-bit
+beq $s6, $zero, return_readFloat # if null then exit
+nop
+addiu $s1, $s1, 1 # increment position counter
+li $t0, 0x01 # point flag not set?
+bne $s4, $t0, load_a
+nop
+
+sw $s6, 0($s3) # store byte => (b)
+addiu $s3, $s3, 0x04 # increment offset
+j read_float
+nop
+load_a:
+li $t0, 0x2E # decimal point code
+beq $s6, $t0, set_flag_point # if "." in RB
+nop
+sw $s6, 0($s2) # store byte => (a)
+addiu $s2, $s2, 0x04 # increment offset
+j read_float
+nop
+set_flag_point:
+ori $s4, $s4 0x00000001
+move $v0, $s1 # store length of (a)
+li $s1, 0x00000000 # reset position counter
+j read_float
+nop
+# end read_RB
+
+isNull:
+bne $s1, $zero, return_readFloat # there was a string read.. we are done
+nop
+j read_float # otherwise we are still waiting for an input
+nop
+
+###############################
+#        POSTCONDITIONS       # 
+###############################
+
+# $v0 length of (a) 
+# $v1 length of (b)
+# (a) - integer_array
+# (b) - frac_array
+
+return_readFloat:
+# tidy up and prep for next module
+move $v1, $s1 # store length of (b)
+and $s1, $s1, $zero # clear counter
+andi $s4, $s4, 0x0000000E # clear point flag
+jr $ra
+nop #jump to next module

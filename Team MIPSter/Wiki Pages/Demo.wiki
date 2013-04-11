@@ -1,0 +1,72 @@
+#summary Brief explanation of the IEEE 475 demo
+
+= Team MIPSter IEE 475 Core API =
+
+<wiki:toc max_depth="4" />
+
+== The Setup ==
+Set up two 32 bit spaces to serve as storing point arrays for the integer and
+fractional parts of the floating point number.
+
+== Reading ==
+The required format for a floating point number is [s][int][.][frac]
+
+Where s represents the presence or absence of a negative sign,
+Int represents the integer portion of the number,
+. represents the decimal point, or radix, and
+frac represents the fractional part of the number.
+
+=== Procedure ===
+
+==== Setting Up ====
+Load the necessary values into registers. These include:
+* The integer array
+* The fractional array
+* The location of the UART
+* A position counter (initialized to zero)
+* A point flag (initialized to zero)
+* Clear the status register (Need confirmation)
+
+==== Reading From UART ====
+# Load the UART's status into a register
+# Mask the status to get the ready bit
+# If the ready bit is zero (set), check to see if a string was read
+** If yes, clean up and exit the function
+** If no, return to the beginning of the function
+# Read the receive buffer
+# Clear the ready bit
+# If the receive buffer is zero, clean up and exit the function
+# Increment the position counter
+# If the point flag isn't set,
+** If the character in the read buffer is a decimal point, set flag point
+** If not, store the byte and increment the offset
+** Return to beginning of function
+# Else, store the byte and increment the offset
+# Return to beginning of function
+
+The post conditions of the function are as follows:
+* $v0 contains the length of the integer array
+* $v1 contains the length of the fractional array
+
+=== Parsing Input ===
+
+==== Setting Up ====
+Load the necessary values into registers. These include:
+* The length of the integer array
+* The length of the fractional array
+* The integer value 1
+
+After loading the values, the following operations need to be performed:
+* Subtract 1 from the length of the integer array
+* Clear the bits of the first return register ($v0)
+# Clear the bits from the second return register ($v1)
+
+==== Parsing The Integer ====
+* Load the location of the integer array into a register
+* Set aside a register to serve as a counter, and initialize it to zero
+* Load the value of an ASCII decimal point into a register
+* Get the next byte (character) of input
+
+BEGIN LOOP
+* Get the next byte (character of input)
+* If the counter register is equal to the length of the integer array, exit the function
